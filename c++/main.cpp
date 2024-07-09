@@ -12,7 +12,7 @@ Copyright (C) 2021 Continuum Robotics Laboratory, University of Toronto Mississa
 */
 
 //includes
-#include "/tdcr-modeling/c++/include/tendondrivenrobot.h"
+#include "tendondrivenrobot.h"
 #include <iostream>
 #include <Eigen/Dense>
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     pradius_disks[0] = 10*1e-3;
     pradius_disks[1] = 10*1e-3;
 	
-	
+
 	//Radius of the backbone
     double ro = 0.7*1e-3;
 	
@@ -55,16 +55,16 @@ int main(int argc, char **argv)
 
     Eigen::Vector3d tendon1;
     tendon1 << 0,
-            pradius_disks[0],
+            m_pradius_disks[0],
             0;
 
     Eigen::Vector3d tendon2;
-    tendon2 <<  pradius_disks[0]*std::cos(-M_PI/6),
-            pradius_disks[0]*std::sin(-M_PI/6),
+    tendon2 <<  m_pradius_disks[0]*std::cos(2*M_PI/3),
+            m_pradius_disks[0]*std::sin(2*M_PI/3),
             0;
     Eigen::Vector3d tendon3;
-    tendon3 <<  pradius_disks[0]*std::cos(7*M_PI/6),
-            pradius_disks[0]*std::sin(7*M_PI/6),
+    tendon3 <<  m_pradius_disks[0]*std::cos(4*M_PI/3),
+            m_pradius_disks[0]*std::sin(4*M_PI/3),
             0;
 
     routing.push_back(tendon1);
@@ -72,15 +72,15 @@ int main(int argc, char **argv)
     routing.push_back(tendon3);
 
     tendon1 << 0,
-            pradius_disks[1],
+            m_pradius_disks[1],
             0;
 
-    tendon2 <<  pradius_disks[1]*std::cos(-M_PI/6),
-            pradius_disks[1]*std::sin(-M_PI/6),
+    tendon2 <<  m_pradius_disks[1]*std::cos(2*M_PI/3),
+            m_pradius_disks[1]*std::sin(2*M_PI/3),
             0;
 
-    tendon3 <<  pradius_disks[1]*std::cos(7*M_PI/6),
-            pradius_disks[1]*std::sin(7*M_PI/6),
+    tendon3 <<  m_pradius_disks[1]*std::cos(4*M_PI/3),
+            m_pradius_disks[1]*std::sin(4*M_PI/3),
             0;
 
     routing.push_back(tendon1);
@@ -120,6 +120,8 @@ int main(int argc, char **argv)
 	if(success)
 		std::cout << "Tip frame calculated using Cosserat Rod:" <<std::endl << ee_frame <<std::endl;
 	
+    return 2
+
 	success = robot.forwardKinematics(ee_frame,q,f_ext,l_ext,TendonDrivenRobot::Model::PiecewiseConstantCurvature);
 	if(success)
 		std::cout << "Tip frame calculated using Piecewise Constant Curvature:" <<std::endl << ee_frame <<std::endl;
