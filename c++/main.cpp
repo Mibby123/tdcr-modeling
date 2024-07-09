@@ -12,7 +12,7 @@ Copyright (C) 2021 Continuum Robotics Laboratory, University of Toronto Mississa
 */
 
 //includes
-#include "tendondrivenrobot.h"
+#include "/tdcr-modeling/c++/include/tendondrivenrobot.h"
 #include <iostream>
 #include <Eigen/Dense>
 
